@@ -1,4 +1,4 @@
-package cn.like.thread.study;
+package cn.like.study.thread;
 
 /**
  * 多个线程访问同一个变量，存在非线程安全的问题，比如投票票数、销售商品数量

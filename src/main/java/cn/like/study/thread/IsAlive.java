@@ -1,4 +1,4 @@
-package cn.like.thread.study;
+package cn.like.study.thread;
 
 /**
  * 判断当前线程师傅处于活动状态,既线程已启动且未终止

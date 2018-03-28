@@ -1,4 +1,4 @@
-package cn.like.thread.study;
+package cn.like.study.thread;
 
 /**
  * currentThread()方法可返回代码段正在被哪个线程调用的信息。

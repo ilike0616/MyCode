@@ -1,4 +1,4 @@
-package cn.like.thread.study;
+package cn.like.study.thread;
 
 public class MyRunnable implements Runnable {
 
