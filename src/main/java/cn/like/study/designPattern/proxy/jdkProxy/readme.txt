@@ -1,0 +1,6 @@
+JDK动态代理的实现步骤
+
+1.创建被代理的类和接口
+2.创建一个实现InvocationHandler接口的，必须实现invoke方法
+3.调用Proxy的静态方法newProxyInstance，创建一个代理类
+4.通过代理类调用方法
