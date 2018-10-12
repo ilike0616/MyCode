@@ -13,7 +13,8 @@ public class SingletonLazy {
     private SingletonLazy() {
     }
     //这是线程不安全的，多线程时不能正常工作。
-    //比如线程A调用方法判断instance为null，此时CPU切换线程B调用方法判断instance也为null，创建实例，然后切线线程A也创建了实例
+    //比如线程A调用方法判断instance为null，
+    //此时CPU切换线程B调用方法判断instance也为null，创建实例，然后切线线程A也创建了实例
     public static SingletonLazy getIntance() {
         if (instance == null) {
             instance = new SingletonLazy();

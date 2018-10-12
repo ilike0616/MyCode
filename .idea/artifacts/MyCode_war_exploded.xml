@@ -1,0 +1,33 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="MyCode:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/MyCode_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="MyCode" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: cn.hutool:hutool-all:4.0.7" />
+          <element id="library" level="project" name="Maven: cglib:cglib:3.2.6" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:6.0" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant:1.9.6" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.9.6" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.ehcache:ehcache:3.5.2" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: com.alibaba:dubbo:2.6.1" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
+          <element id="library" level="project" name="Maven: org.jboss.netty:netty:3.2.5.Final" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="MyCode/web/Web" />
+    </root>
+  </artifact>
+</component>

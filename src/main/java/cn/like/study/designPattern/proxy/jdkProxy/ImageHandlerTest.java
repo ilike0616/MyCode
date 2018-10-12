@@ -27,5 +27,7 @@ public class ImageHandlerTest {
         Image i = (Image)Proxy.newProxyInstance(aClass.getClassLoader(),aClass.getInterfaces(),handler);
 
         i.display();
+
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGenerateFiles","true");
     }
 }

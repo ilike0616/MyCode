@@ -21,5 +21,8 @@ public class SingletonPatterDemo {
 
         SingletonHungary object = SingletonHungary.getInstance();
         object.showMessage();
+
+        SingletonEnum.INSTANCE.whateverMethod();
+
     }
 }
