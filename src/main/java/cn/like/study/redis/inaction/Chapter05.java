@@ -2,7 +2,6 @@ package cn.like.study.redis.inaction;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.apache.commons.csv.CSVParser;
 import org.javatuples.Pair;
 import redis.clients.jedis.*;
 
@@ -178,14 +177,14 @@ public class Chapter05 {
         }
 
         System.out.println("Importing IP addresses to Redis... (this may take a while)");
-        importIpsToRedis(conn, blocks);
+        //importIpsToRedis(conn, blocks);
         long ranges = conn.zcard("ip2cityid:");
         System.out.println("Loaded ranges into Redis: " + ranges);
         assert ranges > 1000;
         System.out.println();
 
         System.out.println("Importing Location lookups to Redis... (this may take a while)");
-        importCitiesToRedis(conn, locations);
+        //importCitiesToRedis(conn, locations);
         long cities = conn.hlen("cityid2city:");
         System.out.println("Loaded city lookups into Redis:" + cities);
         assert cities > 1000;
@@ -439,7 +438,7 @@ public class Chapter05 {
 
         return REDIS_CONNECTIONS.get(key);
     }
-
+/**
     public void importIpsToRedis(Jedis conn, File file) {
         FileReader reader = null;
         try{
@@ -505,7 +504,7 @@ public class Chapter05 {
                 // ignore
             }
         }
-    }
+    }*/
 
     public int ipToScore(String ipAddress) {
         int score = 0;
