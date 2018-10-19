@@ -30,6 +30,8 @@ public class StringTest {
         //它遵循以下规则：对于任意两个字符串 s 和 t，当且仅当 s.equals(t) 为 true 时，s.intern() == t.intern() 才为 true。
         str4 = (str1+str2).intern();
         System.out.println(str3 == str4);   //true
-
     }
+/**
+
+ */
 }
