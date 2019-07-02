@@ -25,38 +25,54 @@ public class Shudu {
         };
         //int x[][] = init();
         long start = System.currentTimeMillis();
-        fillCell(x, 0, 0);
+        int row = 0, col = 0;//第一个需要填充的位置
+        while (x[row][col] != 0) {
+            if (col == 8) {
+                row++;
+                col = 0;
+            }
+            col++;
+        }
+        boolean succes = fillCell(x, row, col);
         long end = System.currentTimeMillis();
         long time = end - start;
-        System.out.println("用时" + time + "毫秒");
+        System.out.println((succes ? "成功" : "失败") + "用时" + time + "毫秒");
         print(x);
     }
 
     private static int[][] init() {
         int[][] grid = new int[9][9];
         for (int i = 0; i < grid.length; i++) {
-            System.out.print("请输入第" + (i + 1) + "行，以逗号分开：");
+            System.out.print("请输入第" + (i + 1) + "行:");
             Scanner scan = new Scanner(System.in); // 从键盘接收数据
-            String num[] = scan.next().split(",");
-            while (num.length != 9) {
-                System.out.println("请重新输入第" + (i + 1) + "行，以逗号分开：");
+            String str = scan.next();
+            while (str == null || str.length() != 9) {
+                System.out.println("请重新输入第" + (i + 1) + "行：");
                 scan = new Scanner(System.in); // 从键盘接收数据
-                num = scan.next().split(",");
+                str = scan.next();
             }
             for (int j = 0; j < grid.length; j++) {
-                grid[i][j] = Integer.parseInt(num[j]);
+                grid[i][j] = Integer.parseInt(String.valueOf(str.charAt(j)));
             }
         }
         return grid;
     }
 
+    /**
+     * 递归函数
+     *
+     * @param x 已填数组
+     * @param r 目标横坐标
+     * @param c 目标纵坐标
+     * @return
+     */
     private static boolean fillCell(int[][] x, int r, int c) {
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 9; i++) {//第r行第c列从1开始到9逐个尝试
             x[r][c] = i;
-            if (checkNum(x, r, c)) {
+            if (checkNum(x, r, c)) {//检查已有数字
                 int rc[] = nextRC(x, r, c);
                 if (rc[0] < 9 && rc[1] < 9) {
-                    boolean next = fillCell(x, rc[0], rc[1]);
+                    boolean next = fillCell(x, rc[0], rc[1]);//递归调用
                     if (next) {
                         return true;
                     } else {
@@ -68,10 +84,18 @@ public class Shudu {
                 }
             }
         }
-        x[r][c] = 0;
+        x[r][c] = 0;    //1-9都不符合规则，恢复代填标识0
         return false;
     }
 
+    /**
+     * 下一个需要填充单元格坐标
+     *
+     * @param x
+     * @param r
+     * @param c
+     * @return
+     */
     private static int[] nextRC(int[][] x, int r, int c) {
         c++;
         if (c >= 9) {
