@@ -8,10 +8,9 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState;
+import org.apache.pdfbox.pdmodel.graphics.image.PDInlineImage;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.pdfbox.util.Matrix;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -33,33 +32,34 @@ import java.util.List;
 public class PdfUtil {
 
     private static PDFont FONT = PDType1Font.HELVETICA;
-    private static  float FONT_SIZE = 10;
+    private static float FONT_SIZE = 10;
     private static final float LEADING = -1.5f * FONT_SIZE;
 
     public static void main(String[] args) throws IOException {
-        File myFile = new File("/data/tax-api/user_agreement.pdf");
-        String imgFileName = "/Users/ilike/Pictures/teacher.png";
+        //File myFile = new File("/data/tax-api/user_agreement.pdf");
+        //String imgFileName = "/Users/ilike/Pictures/teacher.png";
         //System.out.println(readePdf(myFile));
         // addImage(myFile, imgFileName);
-        pdfPage2Img(myFile);
-        //writePdf();
+        //pdfPage2Img(myFile);
+        writePdf();
     }
 
-    private static void writePdf(){
+    private static void writePdf() {
         try {
-            InputStream in = PdfUtil.class.getClassLoader().getResourceAsStream("user_agreement.pdf");
+            InputStream in = PdfUtil.class.getClassLoader().getResourceAsStream("user_agreement_v3.pdf");
             PDDocument document = PDDocument.load(in);
 
             PDPage page = document.getPage(0);
+            //AppendMode：APPEND在原内容后添加；PREPEND在原内容前添加，写入的内容会被覆盖
             PDPageContentStream contentStream = new PDPageContentStream(document, page,
-                    PDPageContentStream.AppendMode.PREPEND, false);
+                    PDPageContentStream.AppendMode.APPEND, false);
 
             InputStream inFont = PdfUtil.class.getClassLoader().getResourceAsStream("simfang.ttf");
             PDType0Font font = PDType0Font.load(document, inFont);
             contentStream.setFont(font, 12);
 
 //            showTextByLeft(contentStream, "从之科技", "", 135,725);
-            showTextByLeft(contentStream, "李珂", "", 135,685);
+            showTextByLeft(contentStream, "李珂111111111", "", 135, 662);
 //            showTextByLeft(contentStream, "男", "", 340,685);
 //            showTextByLeft(contentStream, "41022419870616263X", "", 155,653);
 //            showTextByLeft(contentStream, "15738888063", "", 360,653);
@@ -68,17 +68,17 @@ public class PdfUtil {
 
             PDPage lastPage = document.getPage(document.getNumberOfPages() - 1);
             PDPageContentStream contentStream1 = new PDPageContentStream(document, lastPage,
-                    PDPageContentStream.AppendMode.PREPEND, false);
+                    PDPageContentStream.AppendMode.APPEND, false);
             contentStream1.setFont(font, 12);
-            showTextByLeft(contentStream1, "2019", "", 170, 590);
-            showTextByLeft(contentStream1, "9", "", 220, 590);
-            showTextByLeft(contentStream1, "16", "", 260, 590);
-            showTextByLeft(contentStream1, "2019", "", 370, 590);
-            showTextByLeft(contentStream1, "9", "", 420, 590);
-            showTextByLeft(contentStream1, "16", "", 460, 590);
+            showTextByLeft(contentStream1, "2019", "", 170, 520);
+            showTextByLeft(contentStream1, "9", "", 220, 520);
+            showTextByLeft(contentStream1, "16", "", 255, 520);
+            showTextByLeft(contentStream1, "2019", "", 370, 520);
+            showTextByLeft(contentStream1, "9", "", 420, 520);
+            showTextByLeft(contentStream1, "16", "", 455, 520);
 
             PDImageXObject pdImage = PDImageXObject.createFromFile("/Users/ilike/Pictures/teacher.png", document);
-            contentStream1.drawImage(pdImage, 380, 600, 100, 100);
+            contentStream1.drawImage(pdImage, 380, 550, 100, 100);
 
             contentStream1.close();
             document.save(new File("/data/new_VAT_INVOICE.pdf"));
@@ -95,9 +95,9 @@ public class PdfUtil {
 
         contentStream.setFont(FONT, FONT_SIZE);
         contentStream.newLineAtOffset(sx, sy);
-        for (String line: lines) {
+        for (String line : lines) {
             float charSpacing = 0;
-            if (justify){
+            if (justify) {
                 if (line.length() > 1) {
                     float size = FONT_SIZE * FONT.getStringWidth(line) / 1000;
                     float free = width - size;
@@ -114,7 +114,7 @@ public class PdfUtil {
 
     private static List<String> parseLinesRecursive(String text, float width, List<String> lines) throws IOException {
         String tmpText = text;
-        for (int i=0; i<text.length(); i++) {
+        for (int i = 0; i < text.length(); i++) {
             tmpText = text.substring(0, text.length() - i);
 
             float realWidth = FONT_SIZE * FONT.getStringWidth(tmpText) / 1000;
@@ -144,8 +144,13 @@ public class PdfUtil {
         //Setting the position for the line
         overContent.newLineAtOffset(x, y);
 
+        //overContent.setTextRise(100f);
+
+        //PDInlineImage txtImage = new PDInlineImage();
+
         //Adding text in the form of string
         overContent.showText(txt);
+        //overContent.drawString(txt);
 
         //Ending the content stream
         overContent.endText();
@@ -194,7 +199,7 @@ public class PdfUtil {
 
             try (PDPageContentStream cont = new PDPageContentStream(doc, pages.get(pages.getCount() - 1),
                     PDPageContentStream.AppendMode
-                            .PREPEND, true, true)) {
+                            .APPEND, true, true)) {
 
                 cont.drawImage(pdImage, offset, offset, iw, ih);
                 cont.close();
